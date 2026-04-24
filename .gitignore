@@ -46,4 +46,5 @@ next-env.d.ts
 
 # tina generated
 public/admin/
-tina/__generated__/
+tina/__generated__/client.ts
+tina/__generated__/.cache/

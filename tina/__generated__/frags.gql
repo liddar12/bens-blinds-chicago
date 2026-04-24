@@ -1,0 +1,48 @@
+fragment BlogParts on Blog {
+  __typename
+  title
+  excerpt
+  date
+  slug
+  category
+  image
+  imageAlt
+  body
+}
+
+fragment ProductParts on Product {
+  __typename
+  title
+  slug
+  tagline
+  description
+  image
+  imageAlt
+  features {
+    __typename
+    icon
+    text
+  }
+  faqs {
+    __typename
+    q
+    a
+  }
+  body
+}
+
+fragment SettingsParts on Settings {
+  __typename
+  siteName
+  phone
+  email
+  address
+  city
+  state
+  zip
+  nav {
+    __typename
+    label
+    href
+  }
+}

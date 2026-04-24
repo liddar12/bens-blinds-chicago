@@ -1,6 +1,7 @@
 # TinaCMS Integration + Multi-Location Site Restructure
 **Date:** 2026-04-24  
-**Status:** Approved — executing Phase 1
+**Last Updated:** 2026-04-24  
+**Status:** Phases 1–6 complete · Phases 7–8 pending · Part 2 (Steamboat) pending
 
 ---
 
@@ -240,19 +241,35 @@ Multi-location restructure is intentionally sequenced **after** TinaCMS is fully
 
 ## Phase Summary
 
-| # | Phase | Est. Time | Session |
-|---|-------|-----------|---------|
-| 1 | Page-by-page QA audit + fixes | ~3 hrs | Session 1 |
-| 2 | GitHub repo + Netlify git integration | ~1 hr | Session 2 |
-| 3 | TinaCMS install + Tina Cloud setup | ~2 hrs | Session 2 |
-| 4 | Content migration: blog + nav + settings | ~3 hrs | Session 3 |
-| 5 | Content migration: products + neighborhoods | ~3 hrs | Session 4 |
-| 6 | Contextual editing across all pages | ~4 hrs | Session 5 |
-| 7 | Homepage page builder (blocks) | ~5 hrs | Session 6 |
-| 8 | Publish button + media library + full audit | ~2 hrs | Session 7 |
-| 9 | Write multi-location spec + TinaCMS multi-site model | ~2 hrs | Session 8 |
+| # | Phase | Status | Notes |
+|---|-------|--------|-------|
+| 1 | Page-by-page QA audit + fixes | ✅ Complete | Review card padding fixed; product FAQ padding fixed |
+| 2 | GitHub repo + Netlify git integration | ✅ Complete | `liddar12/bens-blinds-chicago` public; Netlify on `main` branch |
+| 3 | TinaCMS install + Tina Cloud setup | ✅ Complete | `tina/config.ts`, env vars, tina-lock.json committed; TinaCloud indexing `content` branch |
+| 4 | Content migration: blog + nav + settings | ✅ Complete | 12 MDX posts in `content/blog/`; `content/settings/site.json` |
+| 5 | Content migration: products | ✅ Complete | 8 MDX products in `content/products/` with FAQs |
+| 6 | Contextual editing (blog posts) | ✅ Complete | `BlogPostClient` with `useTina()` + `data-tina-field`; `src/lib/tina-client.ts` |
+| 7 | Homepage page builder (blocks) | ⏳ Pending | Requires refactoring `HomeClient.tsx` into typed block components |
+| 8 | Publish button + media library + full audit | ⏳ Pending | GitHub API merge endpoint; full 49-page audit |
+| 9 | Write multi-location spec | ✅ Complete | This document |
 
-**Total: ~25 hours across 8 sessions**
+### Actual Implementation Details (Phase 3–6)
+
+**Resolved blocker — TinaCloud branch indexing:**
+- `tina-lock.json` is generated at `tina/tina-lock.json` (not project root as docs imply)
+- Must be committed to repo for TinaCloud to index the branch
+- Committed after running `tinacms build --local --skip-cloud-checks`
+- Branch appeared in TinaCloud dashboard only after clicking "Reindex"
+
+**Generated files committed:**
+- `tina/__generated__/` (all except `client.ts` which has machine-specific `cacheDir` and `.cache/`)
+- `src/lib/tina-client.ts` — portable client wrapper that constructs URL from env vars
+
+**Blog post page architecture:**
+- Server component fetches from TinaCloud via `tinaClient.queries.blog({ relativePath })`
+- Falls back to `BLOG_POSTS` hardcoded data if TinaCloud fetch fails
+- `BlogPostClient` renders with `useTina()` for live editing; `TinaMarkdown` for rich-text body
+- `data-tina-field` on `title`, `excerpt`, `date`, `image`, `body` fields
 
 ---
 

@@ -5,9 +5,10 @@ import { PRODUCTS } from '@/lib/season'
 import { Icon } from '@/components/ui/Icon'
 
 export const metadata: Metadata = {
-  title: "Our Brand Partners | Ben's Blinds Chicago",
+  title: "Our Brand Partners",
   description:
     "Ben's Blinds Chicago is an authorized dealer for Hunter Douglas, Horizons Window Fashions, EXUS Custom Shutters, ALTA Window Fashions, and SUNPRO. Premium window treatment brands, expert local installation.",
+  alternates: { canonical: 'https://bensblinds.com/partners' },
 }
 
 const TIER_ORDER: Record<string, number> = { premier: 0, certified: 1, authorized: 2 }

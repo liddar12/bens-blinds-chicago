@@ -15,9 +15,10 @@ const fetchTinaHomepage = cache(async () => {
 })
 
 export const metadata: Metadata = {
-  title: "Ben's Blinds Chicago | Custom Blinds, Shades & Shutters",
+  title: { absolute: "Ben's Blinds Chicago | Custom Blinds, Shades & Shutters" },
   description:
     "Chicago's trusted window treatment specialists. Custom blinds, shades, shutters, and drapery. Free in-home consultations. Hunter Douglas dealer serving all Chicago neighborhoods.",
+  alternates: { canonical: 'https://bensblinds.com' },
 }
 
 export default async function HomePage() {

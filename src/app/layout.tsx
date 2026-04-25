@@ -83,6 +83,7 @@ const localBusinessSchema = {
   description:
     "Custom window treatments including blinds, shades, and shutters serving Chicagoland since 2005.",
   url: 'https://bensblinds.com',
+  image: 'https://bensblinds.com/og-default.png',
   telephone: '+13123610908',
   email: 'info@bensblinds.com',
   address: {

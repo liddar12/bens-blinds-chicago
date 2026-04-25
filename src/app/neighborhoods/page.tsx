@@ -5,9 +5,10 @@ import { IMG } from '@/lib/images'
 import { Icon } from '@/components/ui/Icon'
 
 export const metadata: Metadata = {
-  title: "Chicago Neighborhoods We Serve | Ben's Blinds",
+  title: "Chicago Neighborhoods We Serve",
   description:
     "Ben's Blinds serves every Chicago neighborhood: from Lincoln Park bay windows to West Loop loft glass. Free in-home consultation throughout Chicagoland.",
+  alternates: { canonical: 'https://bensblinds.com/neighborhoods' },
 }
 
 const NEIGHBORHOOD_DETAILS: Record<string, {

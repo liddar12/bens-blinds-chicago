@@ -4,9 +4,10 @@ import { SEASONS, PRODUCTS, type SeasonKey } from '@/lib/season'
 import { Icon } from '@/components/ui/Icon'
 
 export const metadata: Metadata = {
-  title: "Chicago Window Treatment Seasonal Guide | Ben's Blinds",
+  title: "Chicago Window Treatment Seasonal Guide",
   description:
     "The complete guide to window treatments for every Chicago season: spring light-filtering to polar vortex insulation. Expert advice matched to Chicago's climate.",
+  alternates: { canonical: 'https://bensblinds.com/seasonal' },
 }
 
 const SEASONAL_CONTENT: Record<SeasonKey, {

@@ -4,7 +4,7 @@ import { BLOG_POSTS } from '@/lib/blog'
 import { Icon } from '@/components/ui/Icon'
 
 export const metadata: Metadata = {
-  title: "Chicago Window Treatment Guide & Blog | Ben's Blinds",
+  title: "Chicago Window Treatment Guide & Blog",
   description:
     "Expert guides on window treatments for Chicago homes: energy efficiency, smart home integration, greystone windows, solar shades, cellular shades, and more from Ben's Blinds Chicago.",
   keywords: [

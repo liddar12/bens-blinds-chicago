@@ -3,9 +3,10 @@ import Link from 'next/link'
 import { Icon } from '@/components/ui/Icon'
 
 export const metadata: Metadata = {
-  title: "Window Treatment FAQs | Ben's Blinds Chicago",
+  title: "Window Treatment FAQs",
   description:
     "Answers to common questions about blinds, shades, and shutters in Chicago: installation, pricing, energy savings, smart home integration, and more.",
+  alternates: { canonical: 'https://bensblinds.com/faq' },
 }
 
 const FAQS = [

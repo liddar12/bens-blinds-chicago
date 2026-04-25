@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import QuoteClient from './QuoteClient'
 
 export const metadata: Metadata = {
-  title: "Free In-Home Consultation | Ben's Blinds Chicago",
+  title: "Free In-Home Consultation",
   description:
     "Book your free in-home window treatment consultation with Ben's Blinds Chicago. We measure every window, recommend the right product, and provide a no-obligation quote. Serving all Chicago neighborhoods.",
   keywords: [
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     'custom window treatment consultation',
   ],
   openGraph: {
-    title: "Book a Free In-Home Consultation | Ben's Blinds Chicago",
+    title: "Book a Free In-Home Consultation",
     description:
       "We come to you anywhere in Chicagoland. Free measurement, expert advice, no-obligation quote.",
   },

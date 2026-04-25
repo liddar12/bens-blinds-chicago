@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!product) return {}
   const meta = PRODUCT_META[slug]
   return {
-    title: meta?.title ?? `${product.name} | Ben's Blinds Chicago`,
+    title: meta?.title ?? `${product.name} in Chicago`,
     description: meta?.description ?? `${product.blurb} Custom ${product.name.toLowerCase()} measured and installed throughout Chicago. Free in-home consultation.`,
     keywords: meta?.keywords,
     openGraph: {

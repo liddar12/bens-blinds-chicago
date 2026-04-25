@@ -68,6 +68,75 @@ export default defineConfig({
         ],
       },
       {
+        name: 'homepage',
+        label: 'Homepage',
+        path: 'content/pages',
+        match: { include: 'home' },
+        format: 'json',
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          {
+            type: 'object', name: 'heroSpring', label: 'Hero — Spring',
+            fields: [
+              { type: 'string', name: 'headline', label: 'Headline' },
+              { type: 'string', name: 'sub', label: 'Subheadline' },
+              { type: 'string', name: 'cta', label: 'CTA Button Text' },
+            ],
+          },
+          {
+            type: 'object', name: 'heroSummer', label: 'Hero — Summer',
+            fields: [
+              { type: 'string', name: 'headline', label: 'Headline' },
+              { type: 'string', name: 'sub', label: 'Subheadline' },
+              { type: 'string', name: 'cta', label: 'CTA Button Text' },
+            ],
+          },
+          {
+            type: 'object', name: 'heroFall', label: 'Hero — Fall',
+            fields: [
+              { type: 'string', name: 'headline', label: 'Headline' },
+              { type: 'string', name: 'sub', label: 'Subheadline' },
+              { type: 'string', name: 'cta', label: 'CTA Button Text' },
+            ],
+          },
+          {
+            type: 'object', name: 'heroWinter', label: 'Hero — Winter',
+            fields: [
+              { type: 'string', name: 'headline', label: 'Headline' },
+              { type: 'string', name: 'sub', label: 'Subheadline' },
+              { type: 'string', name: 'cta', label: 'CTA Button Text' },
+            ],
+          },
+          {
+            type: 'object', name: 'heroSevere', label: 'Hero — Severe Cold (Polar Vortex)',
+            fields: [
+              { type: 'string', name: 'headline', label: 'Headline' },
+              { type: 'string', name: 'sub', label: 'Subheadline' },
+              { type: 'string', name: 'cta', label: 'CTA Button Text' },
+            ],
+          },
+          {
+            type: 'object', name: 'heroHeatwave', label: 'Hero — Heatwave',
+            fields: [
+              { type: 'string', name: 'headline', label: 'Headline' },
+              { type: 'string', name: 'sub', label: 'Subheadline' },
+              { type: 'string', name: 'cta', label: 'CTA Button Text' },
+            ],
+          },
+          {
+            type: 'object', name: 'reviews', label: 'Reviews', list: true,
+            fields: [
+              { type: 'string', name: 'name', label: 'Reviewer Name' },
+              { type: 'string', name: 'hood', label: 'Neighborhood' },
+              { type: 'number', name: 'stars', label: 'Star Rating' },
+              { type: 'string', name: 'text', label: 'Review Text', ui: { component: 'textarea' } },
+            ],
+          },
+          { type: 'string', name: 'ctaHeadline', label: 'CTA Headline' },
+          { type: 'string', name: 'ctaBody', label: 'CTA Body Text', ui: { component: 'textarea' } },
+        ],
+      },
+      {
         name: 'settings',
         label: 'Site Settings',
         path: 'content/settings',

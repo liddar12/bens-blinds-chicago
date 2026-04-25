@@ -30,10 +30,27 @@ const REVIEWS = [
   { name: 'Rita L.',  hood: 'Gold Coast',   stars: 5, text: 'Best decision I made for my condo. The motorized shades work flawlessly with HomeKit. 10/10 recommend.' },
 ]
 
-export function HomeClient() {
+interface TinaFieldMap {
+  heroHeadline?: string
+  heroSub?: string
+  heroCta?: string
+  ctaHeadline?: string
+  ctaBody?: string
+  reviewFields?: Array<{ name?: string; hood?: string; text?: string }>
+}
+
+interface HomeClientProps {
+  heroOverride?: { headline: string; sub: string; cta: string }
+  reviewsOverride?: Array<{ name: string; hood: string; stars: number; text: string }>
+  ctaOverride?: { headline: string; body: string }
+  tinaFields?: TinaFieldMap
+}
+
+export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFields }: HomeClientProps = {}) {
   const { season } = useSeasonContext()
-  const copy = HERO_COPY[season]
+  const copy = heroOverride ?? HERO_COPY[season]
   const seasonInfo = SEASONS[season]
+  const reviews = reviewsOverride ?? REVIEWS
 
   const recommendedProducts = PRODUCTS.filter((p) => p.recommend.includes(season))
   const otherProducts = PRODUCTS.filter((p) => !p.recommend.includes(season))
@@ -71,6 +88,7 @@ export function HomeClient() {
             Chicago {seasonInfo.label} · {seasonInfo.cond}
           </div>
           <h1
+            data-tina-field={tinaFields?.heroHeadline}
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(2rem, 5vw, 3.5rem)',
@@ -85,6 +103,7 @@ export function HomeClient() {
             {copy.headline}
           </h1>
           <p
+            data-tina-field={tinaFields?.heroSub}
             style={{
               fontSize: 'clamp(1rem, 2vw, 1.25rem)',
               color: 'var(--text-2)',
@@ -97,7 +116,7 @@ export function HomeClient() {
             {copy.sub}
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/quote" className="btn btn-primary" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
+            <Link href="/quote" className="btn btn-primary" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }} data-tina-field={tinaFields?.heroCta}>
               {copy.cta}
             </Link>
             <a href="tel:+13123610908" className="btn btn-secondary" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
@@ -406,14 +425,14 @@ export function HomeClient() {
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            {REVIEWS.map((r) => (
+            {reviews.map((r, i) => (
               <div key={r.name} className="card" style={{ padding: '1.5rem' }}>
                 <div style={{ display: 'flex', gap: '0.125rem', marginBottom: '0.75rem' }}>
-                  {Array.from({ length: r.stars }).map((_, i) => (
-                    <Icon key={i} name="star" size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
+                  {Array.from({ length: r.stars }).map((_, si) => (
+                    <Icon key={si} name="star" size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
                   ))}
                 </div>
-                <p style={{ color: 'var(--text)', fontSize: '0.9375rem', lineHeight: 1.6, fontFamily: 'var(--font-body)', marginBottom: '1rem', fontStyle: 'italic' }}>
+                <p data-tina-field={tinaFields?.reviewFields?.[i]?.text} style={{ color: 'var(--text)', fontSize: '0.9375rem', lineHeight: 1.6, fontFamily: 'var(--font-body)', marginBottom: '1rem', fontStyle: 'italic' }}>
                   &ldquo;{r.text}&rdquo;
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -436,8 +455,8 @@ export function HomeClient() {
                     {r.name[0]}
                   </div>
                   <div>
-                    <p style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text)', fontFamily: 'var(--font-body)', margin: 0 }}>{r.name}</p>
-                    <p style={{ fontSize: '0.8125rem', color: 'var(--text-2)', fontFamily: 'var(--font-body)', margin: 0 }}>{r.hood}</p>
+                    <p data-tina-field={tinaFields?.reviewFields?.[i]?.name} style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text)', fontFamily: 'var(--font-body)', margin: 0 }}>{r.name}</p>
+                    <p data-tina-field={tinaFields?.reviewFields?.[i]?.hood} style={{ fontSize: '0.8125rem', color: 'var(--text-2)', fontFamily: 'var(--font-body)', margin: 0 }}>{r.hood}</p>
                   </div>
                 </div>
               </div>
@@ -551,6 +570,7 @@ export function HomeClient() {
       >
         <div className="container">
           <h2
+            data-tina-field={tinaFields?.ctaHeadline}
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.75rem, 3vw, 2.75rem)',
@@ -559,10 +579,10 @@ export function HomeClient() {
               marginBottom: '1rem',
             }}
           >
-            Ready for New Windows That Work for Chicago?
+            {ctaOverride?.headline ?? 'Ready for New Windows That Work for Chicago?'}
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.85)', maxWidth: '520px', margin: '0 auto 2rem', lineHeight: 1.6, fontSize: '1.0625rem', fontFamily: 'var(--font-body)' }}>
-            Book a free in-home consultation. We measure, design, and install: you just enjoy the view.
+          <p data-tina-field={tinaFields?.ctaBody} style={{ color: 'rgba(255,255,255,0.85)', maxWidth: '520px', margin: '0 auto 2rem', lineHeight: 1.6, fontSize: '1.0625rem', fontFamily: 'var(--font-body)' }}>
+            {ctaOverride?.body ?? 'Book a free in-home consultation. We measure, design, and install: you just enjoy the view.'}
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link

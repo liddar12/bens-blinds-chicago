@@ -1,7 +1,7 @@
 # TinaCMS Integration + Multi-Location Site Restructure
 **Date:** 2026-04-24  
 **Last Updated:** 2026-04-24  
-**Status:** Phases 1–6 complete · Phases 7–8 pending · Part 2 (Steamboat) pending
+**Status:** Phases 1–7 complete · Phase 8 pending · Part 2 (Steamboat) pending
 
 ---
 
@@ -249,7 +249,7 @@ Multi-location restructure is intentionally sequenced **after** TinaCMS is fully
 | 4 | Content migration: blog + nav + settings | ✅ Complete | 12 MDX posts in `content/blog/`; `content/settings/site.json` |
 | 5 | Content migration: products | ✅ Complete | 8 MDX products in `content/products/` with FAQs |
 | 6 | Contextual editing (blog posts) | ✅ Complete | `BlogPostClient` with `useTina()` + `data-tina-field`; `src/lib/tina-client.ts` |
-| 7 | Homepage page builder (blocks) | ⏳ Pending | Requires refactoring `HomeClient.tsx` into typed block components |
+| 7 | Homepage contextual editing | ✅ Complete | `homepage` collection in Tina config; `HomePageClient` with `useTina()`; hero/reviews/CTA editable |
 | 8 | Publish button + media library + full audit | ⏳ Pending | GitHub API merge endpoint; full 49-page audit |
 | 9 | Write multi-location spec | ✅ Complete | This document |
 

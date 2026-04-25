@@ -31,6 +31,55 @@ fragment ProductParts on Product {
   body
 }
 
+fragment HomepageParts on Homepage {
+  __typename
+  heroSpring {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroSummer {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroFall {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroWinter {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroSevere {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroHeatwave {
+    __typename
+    headline
+    sub
+    cta
+  }
+  reviews {
+    __typename
+    name
+    hood
+    stars
+    text
+  }
+  ctaHeadline
+  ctaBody
+}
+
 fragment SettingsParts on Settings {
   __typename
   siteName

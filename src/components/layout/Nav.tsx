@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { BbMark } from '@/components/ui/BbMark'
 import { Icon } from '@/components/ui/Icon'
 import { PRODUCTS } from '@/lib/season'
+import siteSettings from '@/../content/settings/site.json'
 
 const PRODUCT_LINKS = PRODUCTS.map((p) => ({
   label: p.name,
@@ -164,7 +165,7 @@ export function Nav() {
         {/* CTA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: 'auto' }}>
           <a
-            href="tel:+13123610908"
+            href={`tel:+1${siteSettings.phone.replace(/\D/g, '')}`}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -177,7 +178,7 @@ export function Nav() {
             className="nav-phone"
           >
             <Icon name="phone" size={15} />
-            (312) 361-0908
+            {siteSettings.phone}
           </a>
           <Link href="/quote" className="btn btn-primary" style={{ fontSize: '0.875rem', padding: '0.5rem 1.125rem' }}>
             Free Quote
@@ -233,11 +234,11 @@ export function Nav() {
           ))}
           <div style={{ paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <a
-              href="tel:+13123610908"
+              href={`tel:+1${siteSettings.phone.replace(/\D/g, '')}`}
               style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-2)', textDecoration: 'none', fontSize: '0.9375rem' }}
             >
               <Icon name="phone" size={16} />
-              (312) 361-0908
+              {siteSettings.phone}
             </a>
             <Link href="/quote" className="btn btn-primary" onClick={() => setMobileOpen(false)}>
               Free Quote

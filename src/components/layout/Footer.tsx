@@ -3,6 +3,7 @@ import { BbMark } from '@/components/ui/BbMark'
 import { Skyline } from '@/components/ui/Skyline'
 import { Icon } from '@/components/ui/Icon'
 import { PRODUCTS, NEIGHBORHOODS } from '@/lib/season'
+import siteSettings from '@/../content/settings/site.json'
 
 const PRODUCT_LINKS = PRODUCTS.map((p) => ({ label: p.name, href: `/products/${p.key}` }))
 const NEIGHBORHOOD_LINKS = NEIGHBORHOODS.slice(0, 6).map((n) => ({
@@ -56,18 +57,18 @@ export function Footer() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.875rem' }}>
               <a
-                href="tel:+13123610908"
+                href={`tel:+1${siteSettings.phone.replace(/\D/g, '')}`}
                 style={{ color: 'rgba(255,255,255,0.75)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
               >
                 <Icon name="phone" size={14} />
-                (312) 361-0908
+                {siteSettings.phone}
               </a>
               <a
-                href="mailto:info@bensblinds.com"
+                href={`mailto:${siteSettings.email}`}
                 style={{ color: 'rgba(255,255,255,0.75)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
               >
                 <Icon name="mail" size={14} />
-                info@bensblinds.com
+                {siteSettings.email}
               </a>
             </div>
           </div>

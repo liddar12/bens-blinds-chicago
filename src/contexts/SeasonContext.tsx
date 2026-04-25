@@ -9,6 +9,8 @@ interface SeasonCtx {
   setSeason: (s: SeasonKey) => void
   tone: ToneKey
   setTone: (t: ToneKey) => void
+  tempF: number | null
+  setTempF: (t: number) => void
 }
 
 const Ctx = createContext<SeasonCtx | null>(null)

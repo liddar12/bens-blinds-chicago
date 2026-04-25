@@ -47,7 +47,7 @@ interface HomeClientProps {
 }
 
 export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFields }: HomeClientProps = {}) {
-  const { season } = useSeasonContext()
+  const { season, tempF } = useSeasonContext()
   const copy = heroOverride ?? HERO_COPY[season]
   const seasonInfo = SEASONS[season]
   const reviews = reviewsOverride ?? REVIEWS
@@ -85,7 +85,7 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
             }}
           >
             <Icon name={seasonInfo.icon} size={13} />
-            Chicago {seasonInfo.label} · {seasonInfo.cond}
+            Chicago {seasonInfo.label}{tempF !== null ? ` · ${tempF}°F` : ` · ${seasonInfo.cond}`}
           </div>
           <h1
             data-tina-field={tinaFields?.heroHeadline}

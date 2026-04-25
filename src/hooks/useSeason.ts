@@ -13,6 +13,7 @@ function getStoredTone(): ToneKey {
 export function useSeason(initial: SeasonKey) {
   const [season, setSeasonState] = useState<SeasonKey>(initial)
   const [tone, setToneState] = useState<ToneKey>('warm')
+  const [tempF, setTempFState] = useState<number | null>(null)
 
   useEffect(() => {
     const stored = getStoredSeason()
@@ -35,6 +36,7 @@ export function useSeason(initial: SeasonKey) {
 
   const setSeason = useCallback((s: SeasonKey) => setSeasonState(s), [])
   const setTone   = useCallback((t: ToneKey)   => setToneState(t),   [])
+  const setTempF  = useCallback((t: number)    => setTempFState(t),  [])
 
-  return { season, setSeason, tone, setTone }
+  return { season, setSeason, tone, setTone, tempF, setTempF }
 }

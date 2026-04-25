@@ -21,7 +21,7 @@ const SEASON_MESSAGES: Record<SeasonKey, (temp: number) => string> = {
 }
 
 export function WeatherBanner() {
-  const { setSeason } = useSeasonContext()
+  const { setSeason, setTempF } = useSeasonContext()
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [dismissed, setDismissed] = useState(false)
 
@@ -32,6 +32,7 @@ export function WeatherBanner() {
         if (!data || data.season === undefined) return
         setWeather(data)
         setSeason(data.season)
+        setTempF(data.tempF)
       })
       .catch(() => null)
   }, [setSeason])
@@ -59,7 +60,7 @@ export function WeatherBanner() {
       }}
     >
       <Icon name={info.icon} size={14} aria-hidden="true" />
-      <span>{msg}</span>
+      <span className="banner-msg">{msg}</span>
       <a
         href="/quote"
         style={{

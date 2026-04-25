@@ -11,12 +11,12 @@ export interface SeasonData {
 }
 
 export const SEASONS: Record<SeasonKey, SeasonData> = {
-  spring:   { label:'Spring',       icon:'leaf',  hi:62,  lo:45,  cond:'Mild · 62°F',        rec:'Light-filtering roller & cellular shades' },
-  summer:   { label:'Summer',       icon:'sun',   hi:88,  lo:72,  cond:'Sunny · 88°F',       rec:'Solar screens, motorized shades, UV filters' },
-  fall:     { label:'Fall',         icon:'cloud', hi:58,  lo:42,  cond:'Crisp · 58°F',       rec:'Layered drapery, wood blinds, warm tones' },
-  winter:   { label:'Winter',       icon:'snow',  hi:28,  lo:14,  cond:'Cold · 28°F',        rec:'Insulating cellular shades, draft blockers' },
-  severe:   { label:'Polar Vortex', icon:'wind',  hi:-4,  lo:-12, cond:'Extreme · -4°F',     rec:'Blackout + insulation + storm shutters' },
-  heatwave: { label:'Heatwave',     icon:'flame', hi:102, lo:82,  cond:'Scorching · 102°F',  rec:'Heat-blocking solar & motorized shades' },
+  spring:   { label:'Spring',       icon:'leaf',  hi:62,  lo:45,  cond:'Mild',      rec:'Light-filtering roller & cellular shades' },
+  summer:   { label:'Summer',       icon:'sun',   hi:88,  lo:72,  cond:'Sunny',     rec:'Solar screens, motorized shades, UV filters' },
+  fall:     { label:'Fall',         icon:'cloud', hi:58,  lo:42,  cond:'Crisp',     rec:'Layered drapery, wood blinds, warm tones' },
+  winter:   { label:'Winter',       icon:'snow',  hi:28,  lo:14,  cond:'Cold',      rec:'Insulating cellular shades, draft blockers' },
+  severe:   { label:'Polar Vortex', icon:'wind',  hi:-4,  lo:-12, cond:'Extreme',   rec:'Blackout + insulation + storm shutters' },
+  heatwave: { label:'Heatwave',     icon:'flame', hi:102, lo:82,  cond:'Scorching', rec:'Heat-blocking solar & motorized shades' },
 }
 
 export function detectSeasonFromMonth(month: number): SeasonKey {

@@ -108,7 +108,6 @@ const localBusinessSchema = {
   },
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '123 N Michigan Ave',
     addressLocality: 'Chicago',
     addressRegion: 'IL',
     postalCode: '60601',

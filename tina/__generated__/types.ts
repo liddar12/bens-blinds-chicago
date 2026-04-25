@@ -86,6 +86,8 @@ export type Query = {
   blogConnection: BlogConnection;
   product: Product;
   productConnection: ProductConnection;
+  homepage: Homepage;
+  homepageConnection: HomepageConnection;
   settings: Settings;
   settingsConnection: SettingsConnection;
 };
@@ -142,6 +144,21 @@ export type QueryProductConnectionArgs = {
 };
 
 
+export type QueryHomepageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryHomepageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<HomepageFilter>;
+};
+
+
 export type QuerySettingsArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -159,6 +176,7 @@ export type QuerySettingsConnectionArgs = {
 export type DocumentFilter = {
   blog?: InputMaybe<BlogFilter>;
   product?: InputMaybe<ProductFilter>;
+  homepage?: InputMaybe<HomepageFilter>;
   settings?: InputMaybe<SettingsFilter>;
 };
 
@@ -199,7 +217,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Blog | Product | Settings | Folder;
+export type DocumentNode = Blog | Product | Homepage | Settings | Folder;
 
 export type Blog = Node & Document & {
   __typename?: 'Blog';
@@ -331,6 +349,150 @@ export type ProductConnection = Connection & {
   edges?: Maybe<Array<Maybe<ProductConnectionEdges>>>;
 };
 
+export type HomepageHeroSpring = {
+  __typename?: 'HomepageHeroSpring';
+  headline?: Maybe<Scalars['String']['output']>;
+  sub?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageHeroSummer = {
+  __typename?: 'HomepageHeroSummer';
+  headline?: Maybe<Scalars['String']['output']>;
+  sub?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageHeroFall = {
+  __typename?: 'HomepageHeroFall';
+  headline?: Maybe<Scalars['String']['output']>;
+  sub?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageHeroWinter = {
+  __typename?: 'HomepageHeroWinter';
+  headline?: Maybe<Scalars['String']['output']>;
+  sub?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageHeroSevere = {
+  __typename?: 'HomepageHeroSevere';
+  headline?: Maybe<Scalars['String']['output']>;
+  sub?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageHeroHeatwave = {
+  __typename?: 'HomepageHeroHeatwave';
+  headline?: Maybe<Scalars['String']['output']>;
+  sub?: Maybe<Scalars['String']['output']>;
+  cta?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomepageReviews = {
+  __typename?: 'HomepageReviews';
+  name?: Maybe<Scalars['String']['output']>;
+  hood?: Maybe<Scalars['String']['output']>;
+  stars?: Maybe<Scalars['Float']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type Homepage = Node & Document & {
+  __typename?: 'Homepage';
+  heroSpring?: Maybe<HomepageHeroSpring>;
+  heroSummer?: Maybe<HomepageHeroSummer>;
+  heroFall?: Maybe<HomepageHeroFall>;
+  heroWinter?: Maybe<HomepageHeroWinter>;
+  heroSevere?: Maybe<HomepageHeroSevere>;
+  heroHeatwave?: Maybe<HomepageHeroHeatwave>;
+  reviews?: Maybe<Array<Maybe<HomepageReviews>>>;
+  ctaHeadline?: Maybe<Scalars['String']['output']>;
+  ctaBody?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type HomepageHeroSpringFilter = {
+  headline?: InputMaybe<StringFilter>;
+  sub?: InputMaybe<StringFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type HomepageHeroSummerFilter = {
+  headline?: InputMaybe<StringFilter>;
+  sub?: InputMaybe<StringFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type HomepageHeroFallFilter = {
+  headline?: InputMaybe<StringFilter>;
+  sub?: InputMaybe<StringFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type HomepageHeroWinterFilter = {
+  headline?: InputMaybe<StringFilter>;
+  sub?: InputMaybe<StringFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type HomepageHeroSevereFilter = {
+  headline?: InputMaybe<StringFilter>;
+  sub?: InputMaybe<StringFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type HomepageHeroHeatwaveFilter = {
+  headline?: InputMaybe<StringFilter>;
+  sub?: InputMaybe<StringFilter>;
+  cta?: InputMaybe<StringFilter>;
+};
+
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type HomepageReviewsFilter = {
+  name?: InputMaybe<StringFilter>;
+  hood?: InputMaybe<StringFilter>;
+  stars?: InputMaybe<NumberFilter>;
+  text?: InputMaybe<StringFilter>;
+};
+
+export type HomepageFilter = {
+  heroSpring?: InputMaybe<HomepageHeroSpringFilter>;
+  heroSummer?: InputMaybe<HomepageHeroSummerFilter>;
+  heroFall?: InputMaybe<HomepageHeroFallFilter>;
+  heroWinter?: InputMaybe<HomepageHeroWinterFilter>;
+  heroSevere?: InputMaybe<HomepageHeroSevereFilter>;
+  heroHeatwave?: InputMaybe<HomepageHeroHeatwaveFilter>;
+  reviews?: InputMaybe<HomepageReviewsFilter>;
+  ctaHeadline?: InputMaybe<StringFilter>;
+  ctaBody?: InputMaybe<StringFilter>;
+};
+
+export type HomepageConnectionEdges = {
+  __typename?: 'HomepageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Homepage>;
+};
+
+export type HomepageConnection = Connection & {
+  __typename?: 'HomepageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<HomepageConnectionEdges>>>;
+};
+
 export type SettingsNav = {
   __typename?: 'SettingsNav';
   label?: Maybe<Scalars['String']['output']>;
@@ -392,6 +554,8 @@ export type Mutation = {
   createBlog: Blog;
   updateProduct: Product;
   createProduct: Product;
+  updateHomepage: Homepage;
+  createHomepage: Homepage;
   updateSettings: Settings;
   createSettings: Settings;
 };
@@ -454,6 +618,18 @@ export type MutationCreateProductArgs = {
 };
 
 
+export type MutationUpdateHomepageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: HomepageMutation;
+};
+
+
+export type MutationCreateHomepageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: HomepageMutation;
+};
+
+
 export type MutationUpdateSettingsArgs = {
   relativePath: Scalars['String']['input'];
   params: SettingsMutation;
@@ -468,6 +644,7 @@ export type MutationCreateSettingsArgs = {
 export type DocumentUpdateMutation = {
   blog?: InputMaybe<BlogMutation>;
   product?: InputMaybe<ProductMutation>;
+  homepage?: InputMaybe<HomepageMutation>;
   settings?: InputMaybe<SettingsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -475,6 +652,7 @@ export type DocumentUpdateMutation = {
 export type DocumentMutation = {
   blog?: InputMaybe<BlogMutation>;
   product?: InputMaybe<ProductMutation>;
+  homepage?: InputMaybe<HomepageMutation>;
   settings?: InputMaybe<SettingsMutation>;
 };
 
@@ -511,6 +689,61 @@ export type ProductMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type HomepageHeroSpringMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  sub?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageHeroSummerMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  sub?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageHeroFallMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  sub?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageHeroWinterMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  sub?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageHeroSevereMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  sub?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageHeroHeatwaveMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  sub?: InputMaybe<Scalars['String']['input']>;
+  cta?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageReviewsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  hood?: InputMaybe<Scalars['String']['input']>;
+  stars?: InputMaybe<Scalars['Float']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomepageMutation = {
+  heroSpring?: InputMaybe<HomepageHeroSpringMutation>;
+  heroSummer?: InputMaybe<HomepageHeroSummerMutation>;
+  heroFall?: InputMaybe<HomepageHeroFallMutation>;
+  heroWinter?: InputMaybe<HomepageHeroWinterMutation>;
+  heroSevere?: InputMaybe<HomepageHeroSevereMutation>;
+  heroHeatwave?: InputMaybe<HomepageHeroHeatwaveMutation>;
+  reviews?: InputMaybe<Array<InputMaybe<HomepageReviewsMutation>>>;
+  ctaHeadline?: InputMaybe<Scalars['String']['input']>;
+  ctaBody?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SettingsNavMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   href?: InputMaybe<Scalars['String']['input']>;
@@ -530,6 +763,8 @@ export type SettingsMutation = {
 export type BlogPartsFragment = { __typename: 'Blog', title: string, excerpt?: string | null, date: string, slug: string, category?: string | null, image?: string | null, imageAlt?: string | null, body?: any | null };
 
 export type ProductPartsFragment = { __typename: 'Product', title: string, slug: string, tagline?: string | null, description?: string | null, image?: string | null, imageAlt?: string | null, body?: any | null, features?: Array<{ __typename: 'ProductFeatures', icon?: string | null, text?: string | null } | null> | null, faqs?: Array<{ __typename: 'ProductFaqs', q?: string | null, a?: string | null } | null> | null };
+
+export type HomepagePartsFragment = { __typename: 'Homepage', ctaHeadline?: string | null, ctaBody?: string | null, heroSpring?: { __typename: 'HomepageHeroSpring', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroSummer?: { __typename: 'HomepageHeroSummer', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroFall?: { __typename: 'HomepageHeroFall', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroWinter?: { __typename: 'HomepageHeroWinter', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroSevere?: { __typename: 'HomepageHeroSevere', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroHeatwave?: { __typename: 'HomepageHeroHeatwave', headline?: string | null, sub?: string | null, cta?: string | null } | null, reviews?: Array<{ __typename: 'HomepageReviews', name?: string | null, hood?: string | null, stars?: number | null, text?: string | null } | null> | null };
 
 export type SettingsPartsFragment = { __typename: 'Settings', siteName?: string | null, phone?: string | null, email?: string | null, address?: string | null, city?: string | null, state?: string | null, zip?: string | null, nav?: Array<{ __typename: 'SettingsNav', label?: string | null, href?: string | null } | null> | null };
 
@@ -570,6 +805,25 @@ export type ProductConnectionQueryVariables = Exact<{
 
 
 export type ProductConnectionQuery = { __typename?: 'Query', productConnection: { __typename?: 'ProductConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProductConnectionEdges', cursor: string, node?: { __typename: 'Product', id: string, title: string, slug: string, tagline?: string | null, description?: string | null, image?: string | null, imageAlt?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, features?: Array<{ __typename: 'ProductFeatures', icon?: string | null, text?: string | null } | null> | null, faqs?: Array<{ __typename: 'ProductFaqs', q?: string | null, a?: string | null } | null> | null } | null } | null> | null } };
+
+export type HomepageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, ctaHeadline?: string | null, ctaBody?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroSpring?: { __typename: 'HomepageHeroSpring', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroSummer?: { __typename: 'HomepageHeroSummer', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroFall?: { __typename: 'HomepageHeroFall', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroWinter?: { __typename: 'HomepageHeroWinter', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroSevere?: { __typename: 'HomepageHeroSevere', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroHeatwave?: { __typename: 'HomepageHeroHeatwave', headline?: string | null, sub?: string | null, cta?: string | null } | null, reviews?: Array<{ __typename: 'HomepageReviews', name?: string | null, hood?: string | null, stars?: number | null, text?: string | null } | null> | null } };
+
+export type HomepageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<HomepageFilter>;
+}>;
+
+
+export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, ctaHeadline?: string | null, ctaBody?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroSpring?: { __typename: 'HomepageHeroSpring', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroSummer?: { __typename: 'HomepageHeroSummer', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroFall?: { __typename: 'HomepageHeroFall', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroWinter?: { __typename: 'HomepageHeroWinter', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroSevere?: { __typename: 'HomepageHeroSevere', headline?: string | null, sub?: string | null, cta?: string | null } | null, heroHeatwave?: { __typename: 'HomepageHeroHeatwave', headline?: string | null, sub?: string | null, cta?: string | null } | null, reviews?: Array<{ __typename: 'HomepageReviews', name?: string | null, hood?: string | null, stars?: number | null, text?: string | null } | null> | null } | null } | null> | null } };
 
 export type SettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -623,6 +877,56 @@ export const ProductPartsFragmentDoc = gql`
     a
   }
   body
+}
+    `;
+export const HomepagePartsFragmentDoc = gql`
+    fragment HomepageParts on Homepage {
+  __typename
+  heroSpring {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroSummer {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroFall {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroWinter {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroSevere {
+    __typename
+    headline
+    sub
+    cta
+  }
+  heroHeatwave {
+    __typename
+    headline
+    sub
+    cta
+  }
+  reviews {
+    __typename
+    name
+    hood
+    stars
+    text
+  }
+  ctaHeadline
+  ctaBody
 }
     `;
 export const SettingsPartsFragmentDoc = gql`
@@ -756,6 +1060,63 @@ export const ProductConnectionDocument = gql`
   }
 }
     ${ProductPartsFragmentDoc}`;
+export const HomepageDocument = gql`
+    query homepage($relativePath: String!) {
+  homepage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...HomepageParts
+  }
+}
+    ${HomepagePartsFragmentDoc}`;
+export const HomepageConnectionDocument = gql`
+    query homepageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HomepageFilter) {
+  homepageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...HomepageParts
+      }
+    }
+  }
+}
+    ${HomepagePartsFragmentDoc}`;
 export const SettingsDocument = gql`
     query settings($relativePath: String!) {
   settings(relativePath: $relativePath) {
@@ -828,6 +1189,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     productConnection(variables?: ProductConnectionQueryVariables, options?: C): Promise<{data: ProductConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProductConnectionQueryVariables, query: string}> {
         return requester<{data: ProductConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProductConnectionQueryVariables, query: string}, ProductConnectionQueryVariables>(ProductConnectionDocument, variables, options);
       },
+    homepage(variables: HomepageQueryVariables, options?: C): Promise<{data: HomepageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageQueryVariables, query: string}> {
+        return requester<{data: HomepageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageQueryVariables, query: string}, HomepageQueryVariables>(HomepageDocument, variables, options);
+      },
+    homepageConnection(variables?: HomepageConnectionQueryVariables, options?: C): Promise<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}> {
+        return requester<{data: HomepageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomepageConnectionQueryVariables, query: string}, HomepageConnectionQueryVariables>(HomepageConnectionDocument, variables, options);
+      },
     settings(variables: SettingsQueryVariables, options?: C): Promise<{data: SettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SettingsQueryVariables, query: string}> {
         return requester<{data: SettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SettingsQueryVariables, query: string}, SettingsQueryVariables>(SettingsDocument, variables, options);
       },
@@ -881,7 +1248,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.2/content/ecc0cdd7-3c47-49a8-86a8-839a4d74d491/github/content",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

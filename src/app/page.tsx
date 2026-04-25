@@ -1,7 +1,18 @@
 import type { Metadata } from 'next'
+import { cache } from 'react'
 import { HomeClient } from '@/components/home/HomeClient'
 import { HomePageClient } from '@/components/home/HomePageClient'
 import { tinaClient } from '@/lib/tina-client'
+
+const fetchTinaHomepage = cache(async () => {
+  'use cache'
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return await (tinaClient.queries as any).homepage({ relativePath: 'home.json' })
+  } catch {
+    return null
+  }
+})
 
 export const metadata: Metadata = {
   title: "Ben's Blinds Chicago | Custom Blinds, Shades & Shutters",
@@ -12,12 +23,9 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let tinaProps: { query: string; variables: Record<string, unknown>; data: any } | null = null
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const tinaData = await (tinaClient.queries as any).homepage({ relativePath: 'home.json' })
+  const tinaData = await fetchTinaHomepage()
+  if (tinaData) {
     tinaProps = { query: tinaData.query, variables: tinaData.variables, data: tinaData.data }
-  } catch {
-    // TinaCMS not available (local dev without tinacms dev running)
   }
 
   return tinaProps ? <HomePageClient {...tinaProps} /> : <HomeClient />

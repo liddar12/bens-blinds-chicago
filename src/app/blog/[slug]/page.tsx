@@ -1,8 +1,18 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { cache } from 'react'
 import { BLOG_POSTS } from '@/lib/blog'
 import { tinaClient } from '@/lib/tina-client'
 import { BlogPostClient } from '@/components/blog/BlogPostClient'
+
+const fetchTinaBlog = cache(async (slug: string) => {
+  'use cache'
+  try {
+    return await tinaClient.queries.blog({ relativePath: `${slug}.mdx` })
+  } catch {
+    return null
+  }
+})
 
 const BASE = 'https://bensblinds.com'
 
@@ -69,14 +79,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ],
   }
 
-  // Fetch from TinaCMS (provides live editing support in admin)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let tinaProps: { query: string; variables: { relativePath: string }; data: any } | null = null
-  try {
-    const tinaData = await tinaClient.queries.blog({ relativePath: `${slug}.mdx` })
+  const tinaData = await fetchTinaBlog(slug)
+  if (tinaData) {
     tinaProps = { query: tinaData.query, variables: tinaData.variables, data: tinaData.data }
-  } catch {
-    // TinaCMS not available (local dev without tinacms dev running)
   }
 
   return (

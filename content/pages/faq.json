@@ -1,0 +1,89 @@
+{
+  "categories": [
+    {
+      "category": "Getting Started",
+      "items": [
+        {
+          "q": "How does your free in-home consultation work?",
+          "a": "We come to your home, measure every window, walk through your goals (privacy, light control, energy savings), and show you samples on-site. The consultation is completely free with no pressure. Most consultations take 45–90 minutes."
+        },
+        {
+          "q": "What areas of Chicago do you serve?",
+          "a": "We serve all Chicago neighborhoods plus the north and south suburbs. That includes Lincoln Park, Wicker Park, Logan Square, Gold Coast, Lakeview, West Loop, Hyde Park, Pilsen, River North, Evanston, Oak Park, and beyond."
+        },
+        {
+          "q": "How long does installation take after I order?",
+          "a": "Standard products ship in 2–3 weeks. Plantation shutters and custom drapery take 4–5 weeks. We schedule installation as soon as products arrive: usually within 1–2 days of delivery."
+        }
+      ]
+    },
+    {
+      "category": "Pricing",
+      "items": [
+        {
+          "q": "How much do custom window treatments cost?",
+          "a": "Roller and solar shades start around $69–$79 per panel. Cellular shades start at $89. Wood blinds start at $99. Roman shades start around $149. Plantation shutters start at $249 per panel. Motorized options add $100–$200 per treatment. We provide a detailed quote after measuring your windows."
+        },
+        {
+          "q": "Do you offer financing?",
+          "a": "Yes, we offer 12-month interest-free financing through our partner program. Ask about financing options during your consultation."
+        },
+        {
+          "q": "Is installation included in the price?",
+          "a": "Professional installation is included in all our quotes. We handle everything: mounting hardware, adjustments, and cleanup."
+        }
+      ]
+    },
+    {
+      "category": "Energy & Chicago Climate",
+      "items": [
+        {
+          "q": "Which window treatments work best for Chicago winters?",
+          "a": "Cellular (honeycomb) shades are the gold standard for Chicago winters. Double-cell construction creates two air pockets that reduce heat loss by up to 40% compared to bare windows. For severe cold snaps, triple-cell with blackout lining provides maximum insulation."
+        },
+        {
+          "q": "How do I reduce heat and glare during Chicago summers?",
+          "a": "Solar shades with 1–5% openness factor block 85–99% of UV radiation and dramatically reduce solar heat gain while maintaining your view. Motorized shades make it easy to adjust throughout the day as the sun moves."
+        },
+        {
+          "q": "Can window treatments actually lower my utility bills?",
+          "a": "Yes, measurably so. Department of Energy studies show cellular shades can reduce heating and cooling costs by 10–15%. In a drafty Chicago greystone or a south-facing condo, the savings are often more significant."
+        }
+      ]
+    },
+    {
+      "category": "Smart Home & Motorization",
+      "items": [
+        {
+          "q": "Do your motorized shades work with Alexa and Google Home?",
+          "a": "Yes. We install Somfy, Lutron, and Rollease motors: all compatible with Alexa, Google Home, Apple HomeKit, and SmartThings. You can control shades by voice, schedule, or phone app."
+        },
+        {
+          "q": "How are motorized shades powered?",
+          "a": "Most of our motorized shades use rechargeable battery motors charged via USB: no electrician needed. For permanent installations, we can coordinate hardwired motors as well."
+        },
+        {
+          "q": "Can I motorize my existing shades?",
+          "a": "Sometimes yes. Many shade brands support retrofit motors. During your consultation, we can assess whether your existing shades are motorization candidates."
+        }
+      ]
+    },
+    {
+      "category": "Installation & Warranty",
+      "items": [
+        {
+          "q": "What if my windows are oddly shaped or non-standard?",
+          "a": "Non-standard windows are our specialty. We handle arches, skylights, bay windows, angled ceilings, oversized frames, and historic casements. We measure everything to the nearest 1/8 inch."
+        },
+        {
+          "q": "What warranty do your products carry?",
+          "a": "Most of our products carry a 3–5 year manufacturer warranty. Hunter Douglas products carry lifetime warranties on most mechanisms. Plantation shutters can be covered with a lifetime warranty. We also warranty our installation workmanship."
+        },
+        {
+          "q": "What happens if something breaks after installation?",
+          "a": "Call us. We stand behind our work and our products. For warranty claims, we coordinate directly with the manufacturer on your behalf. For out-of-warranty service, we offer a flat service call rate."
+        }
+      ]
+    }
+  ]
+}

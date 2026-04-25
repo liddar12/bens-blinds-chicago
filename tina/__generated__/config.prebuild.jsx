@@ -82,7 +82,8 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "headline", label: "Headline" },
               { type: "string", name: "sub", label: "Subheadline" },
-              { type: "string", name: "cta", label: "CTA Button Text" }
+              { type: "string", name: "cta", label: "CTA Button Text" },
+              { type: "image", name: "heroImage", label: "Hero Room Image" }
             ]
           },
           {
@@ -92,7 +93,8 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "headline", label: "Headline" },
               { type: "string", name: "sub", label: "Subheadline" },
-              { type: "string", name: "cta", label: "CTA Button Text" }
+              { type: "string", name: "cta", label: "CTA Button Text" },
+              { type: "image", name: "heroImage", label: "Hero Room Image" }
             ]
           },
           {
@@ -102,7 +104,8 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "headline", label: "Headline" },
               { type: "string", name: "sub", label: "Subheadline" },
-              { type: "string", name: "cta", label: "CTA Button Text" }
+              { type: "string", name: "cta", label: "CTA Button Text" },
+              { type: "image", name: "heroImage", label: "Hero Room Image" }
             ]
           },
           {
@@ -112,7 +115,8 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "headline", label: "Headline" },
               { type: "string", name: "sub", label: "Subheadline" },
-              { type: "string", name: "cta", label: "CTA Button Text" }
+              { type: "string", name: "cta", label: "CTA Button Text" },
+              { type: "image", name: "heroImage", label: "Hero Room Image" }
             ]
           },
           {
@@ -122,7 +126,8 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "headline", label: "Headline" },
               { type: "string", name: "sub", label: "Subheadline" },
-              { type: "string", name: "cta", label: "CTA Button Text" }
+              { type: "string", name: "cta", label: "CTA Button Text" },
+              { type: "image", name: "heroImage", label: "Hero Room Image" }
             ]
           },
           {
@@ -132,7 +137,40 @@ var config_default = defineConfig({
             fields: [
               { type: "string", name: "headline", label: "Headline" },
               { type: "string", name: "sub", label: "Subheadline" },
-              { type: "string", name: "cta", label: "CTA Button Text" }
+              { type: "string", name: "cta", label: "CTA Button Text" },
+              { type: "image", name: "heroImage", label: "Hero Room Image" }
+            ]
+          },
+          { type: "string", name: "statsLine", label: "Hero Stats Line", ui: { component: "textarea" } },
+          {
+            type: "object",
+            name: "trustBar",
+            label: "Trust Bar",
+            list: true,
+            fields: [
+              { type: "string", name: "icon", label: "Icon name" },
+              { type: "string", name: "label", label: "Label text" }
+            ]
+          },
+          {
+            type: "object",
+            name: "processSteps",
+            label: "Process Steps",
+            list: true,
+            fields: [
+              { type: "string", name: "icon", label: "Icon name" },
+              { type: "string", name: "title", label: "Step Title" },
+              { type: "string", name: "body", label: "Step Description", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "featuredProducts",
+            label: "Featured Products",
+            list: true,
+            fields: [
+              { type: "string", name: "slug", label: "Product Slug (cellular, solar, roller, wood, shutters, roman, motorized, drapery)" },
+              { type: "string", name: "badge", label: 'Badge Text (optional, e.g. "Most Popular")' }
             ]
           },
           {
@@ -149,6 +187,59 @@ var config_default = defineConfig({
           },
           { type: "string", name: "ctaHeadline", label: "CTA Headline" },
           { type: "string", name: "ctaBody", label: "CTA Body Text", ui: { component: "textarea" } }
+        ]
+      },
+      {
+        name: "faq",
+        label: "FAQ Page",
+        path: "content/pages",
+        match: { include: "faq" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          {
+            type: "object",
+            name: "categories",
+            label: "FAQ Categories",
+            list: true,
+            fields: [
+              { type: "string", name: "category", label: "Category Name" },
+              {
+                type: "object",
+                name: "items",
+                label: "Questions",
+                list: true,
+                fields: [
+                  { type: "string", name: "q", label: "Question" },
+                  { type: "string", name: "a", label: "Answer", ui: { component: "textarea" } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "neighborhoods",
+        label: "Neighborhoods",
+        path: "content/neighborhoods",
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { type: "string", name: "name", label: "Neighborhood Name", isTitle: true, required: true },
+          { type: "string", name: "slug", label: "Slug" },
+          { type: "string", name: "headline", label: "Page Headline" },
+          { type: "string", name: "intro", label: "Intro", ui: { component: "textarea" } },
+          { type: "string", name: "longDesc", label: "Long Description", ui: { component: "textarea" } },
+          {
+            type: "object",
+            name: "faqs",
+            label: "FAQs",
+            list: true,
+            fields: [
+              { type: "string", name: "q", label: "Question" },
+              { type: "string", name: "a", label: "Answer", ui: { component: "textarea" } }
+            ]
+          }
         ]
       },
       {

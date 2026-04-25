@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { cache } from 'react'
 import { Icon } from '@/components/ui/Icon'
+import { tinaClient } from '@/lib/tina-client'
 
 export const metadata: Metadata = {
   title: "Window Treatment FAQs",
@@ -97,6 +99,16 @@ const FAQS = [
   },
 ]
 
+const fetchTinaFaq = cache(async () => {
+  'use cache'
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return await (tinaClient.queries as any).faq({ relativePath: 'faq.json' })
+  } catch {
+    return null
+  }
+})
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -109,12 +121,29 @@ const faqSchema = {
   ),
 }
 
-export default function FAQPage() {
+export default async function FAQPage() {
+  const tinaData = await fetchTinaFaq()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tinaFaq = tinaData?.data?.faq as any | null
+  const categories: typeof FAQS = tinaFaq?.categories?.length ? tinaFaq.categories : FAQS
+
+  const dynamicFaqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: categories.flatMap((cat: typeof FAQS[number]) =>
+      cat.items.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      }))
+    ),
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(dynamicFaqSchema) }}
       />
 
       {/* Hero */}
@@ -135,7 +164,7 @@ export default function FAQPage() {
       {/* FAQ body */}
       <section style={{ padding: '4rem 1.5rem' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
-          {FAQS.map((cat) => (
+          {categories.map((cat) => (
             <div key={cat.category} style={{ marginBottom: '3.5rem' }}>
               <h2
                 style={{

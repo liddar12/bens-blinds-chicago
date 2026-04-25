@@ -38,36 +38,59 @@ fragment HomepageParts on Homepage {
     headline
     sub
     cta
+    heroImage
   }
   heroSummer {
     __typename
     headline
     sub
     cta
+    heroImage
   }
   heroFall {
     __typename
     headline
     sub
     cta
+    heroImage
   }
   heroWinter {
     __typename
     headline
     sub
     cta
+    heroImage
   }
   heroSevere {
     __typename
     headline
     sub
     cta
+    heroImage
   }
   heroHeatwave {
     __typename
     headline
     sub
     cta
+    heroImage
+  }
+  statsLine
+  trustBar {
+    __typename
+    icon
+    label
+  }
+  processSteps {
+    __typename
+    icon
+    title
+    body
+  }
+  featuredProducts {
+    __typename
+    slug
+    badge
   }
   reviews {
     __typename
@@ -78,6 +101,33 @@ fragment HomepageParts on Homepage {
   }
   ctaHeadline
   ctaBody
+}
+
+fragment FaqParts on Faq {
+  __typename
+  categories {
+    __typename
+    category
+    items {
+      __typename
+      q
+      a
+    }
+  }
+}
+
+fragment NeighborhoodsParts on Neighborhoods {
+  __typename
+  name
+  slug
+  headline
+  intro
+  longDesc
+  faqs {
+    __typename
+    q
+    a
+  }
 }
 
 fragment SettingsParts on Settings {

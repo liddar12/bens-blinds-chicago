@@ -60,6 +60,10 @@ type Query {
   productConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProductFilter): ProductConnection!
   homepage(relativePath: String): Homepage!
   homepageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomepageFilter): HomepageConnection!
+  faq(relativePath: String): Faq!
+  faqConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FaqFilter): FaqConnection!
+  neighborhoods(relativePath: String): Neighborhoods!
+  neighborhoodsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NeighborhoodsFilter): NeighborhoodsConnection!
   settings(relativePath: String): Settings!
   settingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SettingsFilter): SettingsConnection!
 }
@@ -68,6 +72,8 @@ input DocumentFilter {
   blog: BlogFilter
   product: ProductFilter
   homepage: HomepageFilter
+  faq: FaqFilter
+  neighborhoods: NeighborhoodsFilter
   settings: SettingsFilter
 }
 
@@ -94,7 +100,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Blog | Product | Homepage | Settings | Folder
+union DocumentNode = Blog | Product | Homepage | Faq | Neighborhoods | Settings | Folder
 
 type Blog implements Node & Document {
   title: String!
@@ -222,36 +228,58 @@ type HomepageHeroSpring {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 type HomepageHeroSummer {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 type HomepageHeroFall {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 type HomepageHeroWinter {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 type HomepageHeroSevere {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 type HomepageHeroHeatwave {
   headline: String
   sub: String
   cta: String
+  heroImage: String
+}
+
+type HomepageTrustBar {
+  icon: String
+  label: String
+}
+
+type HomepageProcessSteps {
+  icon: String
+  title: String
+  body: String
+}
+
+type HomepageFeaturedProducts {
+  slug: String
+  badge: String
 }
 
 type HomepageReviews {
@@ -268,6 +296,10 @@ type Homepage implements Node & Document {
   heroWinter: HomepageHeroWinter
   heroSevere: HomepageHeroSevere
   heroHeatwave: HomepageHeroHeatwave
+  statsLine: String
+  trustBar: [HomepageTrustBar]
+  processSteps: [HomepageProcessSteps]
+  featuredProducts: [HomepageFeaturedProducts]
   reviews: [HomepageReviews]
   ctaHeadline: String
   ctaBody: String
@@ -280,36 +312,58 @@ input HomepageHeroSpringFilter {
   headline: StringFilter
   sub: StringFilter
   cta: StringFilter
+  heroImage: ImageFilter
 }
 
 input HomepageHeroSummerFilter {
   headline: StringFilter
   sub: StringFilter
   cta: StringFilter
+  heroImage: ImageFilter
 }
 
 input HomepageHeroFallFilter {
   headline: StringFilter
   sub: StringFilter
   cta: StringFilter
+  heroImage: ImageFilter
 }
 
 input HomepageHeroWinterFilter {
   headline: StringFilter
   sub: StringFilter
   cta: StringFilter
+  heroImage: ImageFilter
 }
 
 input HomepageHeroSevereFilter {
   headline: StringFilter
   sub: StringFilter
   cta: StringFilter
+  heroImage: ImageFilter
 }
 
 input HomepageHeroHeatwaveFilter {
   headline: StringFilter
   sub: StringFilter
   cta: StringFilter
+  heroImage: ImageFilter
+}
+
+input HomepageTrustBarFilter {
+  icon: StringFilter
+  label: StringFilter
+}
+
+input HomepageProcessStepsFilter {
+  icon: StringFilter
+  title: StringFilter
+  body: StringFilter
+}
+
+input HomepageFeaturedProductsFilter {
+  slug: StringFilter
+  badge: StringFilter
 }
 
 input NumberFilter {
@@ -336,6 +390,10 @@ input HomepageFilter {
   heroWinter: HomepageHeroWinterFilter
   heroSevere: HomepageHeroSevereFilter
   heroHeatwave: HomepageHeroHeatwaveFilter
+  statsLine: StringFilter
+  trustBar: HomepageTrustBarFilter
+  processSteps: HomepageProcessStepsFilter
+  featuredProducts: HomepageFeaturedProductsFilter
   reviews: HomepageReviewsFilter
   ctaHeadline: StringFilter
   ctaBody: StringFilter
@@ -350,6 +408,90 @@ type HomepageConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [HomepageConnectionEdges]
+}
+
+type FaqCategoriesItems {
+  q: String
+  a: String
+}
+
+type FaqCategories {
+  category: String
+  items: [FaqCategoriesItems]
+}
+
+type Faq implements Node & Document {
+  categories: [FaqCategories]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input FaqCategoriesItemsFilter {
+  q: StringFilter
+  a: StringFilter
+}
+
+input FaqCategoriesFilter {
+  category: StringFilter
+  items: FaqCategoriesItemsFilter
+}
+
+input FaqFilter {
+  categories: FaqCategoriesFilter
+}
+
+type FaqConnectionEdges {
+  cursor: String!
+  node: Faq
+}
+
+type FaqConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FaqConnectionEdges]
+}
+
+type NeighborhoodsFaqs {
+  q: String
+  a: String
+}
+
+type Neighborhoods implements Node & Document {
+  name: String!
+  slug: String
+  headline: String
+  intro: String
+  longDesc: String
+  faqs: [NeighborhoodsFaqs]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input NeighborhoodsFaqsFilter {
+  q: StringFilter
+  a: StringFilter
+}
+
+input NeighborhoodsFilter {
+  name: StringFilter
+  slug: StringFilter
+  headline: StringFilter
+  intro: StringFilter
+  longDesc: StringFilter
+  faqs: NeighborhoodsFaqsFilter
+}
+
+type NeighborhoodsConnectionEdges {
+  cursor: String!
+  node: Neighborhoods
+}
+
+type NeighborhoodsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [NeighborhoodsConnectionEdges]
 }
 
 type SettingsNav {
@@ -410,6 +552,10 @@ type Mutation {
   createProduct(relativePath: String!, params: ProductMutation!): Product!
   updateHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
   createHomepage(relativePath: String!, params: HomepageMutation!): Homepage!
+  updateFaq(relativePath: String!, params: FaqMutation!): Faq!
+  createFaq(relativePath: String!, params: FaqMutation!): Faq!
+  updateNeighborhoods(relativePath: String!, params: NeighborhoodsMutation!): Neighborhoods!
+  createNeighborhoods(relativePath: String!, params: NeighborhoodsMutation!): Neighborhoods!
   updateSettings(relativePath: String!, params: SettingsMutation!): Settings!
   createSettings(relativePath: String!, params: SettingsMutation!): Settings!
 }
@@ -418,6 +564,8 @@ input DocumentUpdateMutation {
   blog: BlogMutation
   product: ProductMutation
   homepage: HomepageMutation
+  faq: FaqMutation
+  neighborhoods: NeighborhoodsMutation
   settings: SettingsMutation
   relativePath: String
 }
@@ -426,6 +574,8 @@ input DocumentMutation {
   blog: BlogMutation
   product: ProductMutation
   homepage: HomepageMutation
+  faq: FaqMutation
+  neighborhoods: NeighborhoodsMutation
   settings: SettingsMutation
 }
 
@@ -466,36 +616,58 @@ input HomepageHeroSpringMutation {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 input HomepageHeroSummerMutation {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 input HomepageHeroFallMutation {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 input HomepageHeroWinterMutation {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 input HomepageHeroSevereMutation {
   headline: String
   sub: String
   cta: String
+  heroImage: String
 }
 
 input HomepageHeroHeatwaveMutation {
   headline: String
   sub: String
   cta: String
+  heroImage: String
+}
+
+input HomepageTrustBarMutation {
+  icon: String
+  label: String
+}
+
+input HomepageProcessStepsMutation {
+  icon: String
+  title: String
+  body: String
+}
+
+input HomepageFeaturedProductsMutation {
+  slug: String
+  badge: String
 }
 
 input HomepageReviewsMutation {
@@ -512,9 +684,41 @@ input HomepageMutation {
   heroWinter: HomepageHeroWinterMutation
   heroSevere: HomepageHeroSevereMutation
   heroHeatwave: HomepageHeroHeatwaveMutation
+  statsLine: String
+  trustBar: [HomepageTrustBarMutation]
+  processSteps: [HomepageProcessStepsMutation]
+  featuredProducts: [HomepageFeaturedProductsMutation]
   reviews: [HomepageReviewsMutation]
   ctaHeadline: String
   ctaBody: String
+}
+
+input FaqCategoriesItemsMutation {
+  q: String
+  a: String
+}
+
+input FaqCategoriesMutation {
+  category: String
+  items: [FaqCategoriesItemsMutation]
+}
+
+input FaqMutation {
+  categories: [FaqCategoriesMutation]
+}
+
+input NeighborhoodsFaqsMutation {
+  q: String
+  a: String
+}
+
+input NeighborhoodsMutation {
+  name: String
+  slug: String
+  headline: String
+  intro: String
+  longDesc: String
+  faqs: [NeighborhoodsFaqsMutation]
 }
 
 input SettingsNavMutation {

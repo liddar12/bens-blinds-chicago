@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { cache } from 'react'
 import { Icon } from '@/components/ui/Icon'
+import { tinaClient } from '@/lib/tina-client'
 
 const BASE = 'https://bensblinds.com'
 
@@ -298,6 +300,16 @@ const NEIGHBORHOOD_DATA: Record<string, NeighborhoodData> = {
   },
 }
 
+const fetchTinaNeighborhood = cache(async (slug: string) => {
+  'use cache'
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return await (tinaClient.queries as any).neighborhoods({ relativePath: `${slug}.json` })
+  } catch {
+    return null
+  }
+})
+
 export async function generateStaticParams() {
   return Object.keys(NEIGHBORHOOD_DATA).map((slug) => ({ slug }))
 }
@@ -322,8 +334,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function NeighborhoodPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const n = NEIGHBORHOOD_DATA[slug]
-  if (!n) notFound()
+  const hardcoded = NEIGHBORHOOD_DATA[slug]
+  if (!hardcoded) notFound()
+
+  // Merge Tina CMS data over hardcoded fallback
+  const tinaData = await fetchTinaNeighborhood(slug)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tinaNeighborhood = tinaData?.data?.neighborhoods as any | null
+  const n: NeighborhoodData = {
+    ...hardcoded,
+    headline: tinaNeighborhood?.headline ?? hardcoded.headline,
+    intro: tinaNeighborhood?.intro ?? hardcoded.intro,
+    longDesc: tinaNeighborhood?.longDesc ?? hardcoded.longDesc,
+    faqs: tinaNeighborhood?.faqs?.length ? tinaNeighborhood.faqs : hardcoded.faqs,
+  }
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',

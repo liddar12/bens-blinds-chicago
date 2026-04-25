@@ -84,8 +84,28 @@ const localBusinessSchema = {
     "Custom window treatments including blinds, shades, and shutters serving Chicagoland since 2005.",
   url: 'https://bensblinds.com',
   image: 'https://bensblinds.com/og-default.png',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://bensblinds.com/og-default.png',
+    width: 1200,
+    height: 630,
+  },
+  foundingYear: 2005,
   telephone: '+13123610908',
   email: 'info@bensblinds.com',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+13123610908',
+    contactType: 'customer service',
+    areaServed: 'Chicago metropolitan area',
+    availableLanguage: 'English',
+    hoursAvailable: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+  },
   address: {
     '@type': 'PostalAddress',
     streetAddress: '123 N Michigan Ave',

@@ -8,6 +8,27 @@ export default defineConfig({
     outputFolder: 'admin',
     publicFolder: 'public',
   },
+  // Visual editor: renders the live site in a preview pane next to the form.
+  // Elements marked with tinaField() become clickable — clicking them focuses
+  // the corresponding form field. On production, point this to bensblinds.com.
+  ui: {
+    previewUrl: (context) => {
+      const base =
+        process.env.NEXT_PUBLIC_SITE_URL ||
+        'https://content--bens-blinds-chicago.netlify.app'
+      // Route to the page that owns the document being edited
+      if (context.collection === 'homepage') return { url: `${base}/` }
+      if (context.collection === 'blog')
+        return { url: `${base}/blog/${context.filename.replace(/\.mdx?$/, '')}` }
+      if (context.collection === 'product')
+        return { url: `${base}/products/${context.filename.replace(/\.mdx?$/, '')}` }
+      if (context.collection === 'neighborhoods')
+        return { url: `${base}/neighborhoods/${context.filename.replace(/\.json$/, '')}` }
+      if (context.collection === 'faq') return { url: `${base}/faq` }
+      if (context.collection === 'settings') return { url: `${base}/` }
+      return { url: `${base}/` }
+    },
+  },
   media: {
     tina: {
       mediaRoot: 'images',

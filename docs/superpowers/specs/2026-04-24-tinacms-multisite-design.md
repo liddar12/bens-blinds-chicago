@@ -1,7 +1,7 @@
 # TinaCMS Integration + Multi-Location Site Restructure
 **Date:** 2026-04-24  
 **Last Updated:** 2026-04-24  
-**Status:** Phases 1–7 complete · Phase 8 pending · Part 2 (Steamboat) pending
+**Status:** Phases 1–8 complete · Part 2 (Steamboat) pending
 
 ---
 
@@ -250,7 +250,7 @@ Multi-location restructure is intentionally sequenced **after** TinaCMS is fully
 | 5 | Content migration: products | ✅ Complete | 8 MDX products in `content/products/` with FAQs |
 | 6 | Contextual editing (blog posts) | ✅ Complete | `BlogPostClient` with `useTina()` + `data-tina-field`; `src/lib/tina-client.ts` |
 | 7 | Homepage contextual editing | ✅ Complete | `homepage` collection in Tina config; `HomePageClient` with `useTina()`; hero/reviews/CTA editable |
-| 8 | Publish button + media library + full audit | ⏳ Pending | GitHub API merge endpoint; full 49-page audit |
+| 8 | Publish button + media library + full audit | ✅ Complete | `/api/publish` route + `/tools/publish` UI page; requires `GITHUB_PUBLISH_TOKEN`, `PUBLISH_SECRET` env vars on Netlify; `next build` passes (fixed Dynamic IO `use cache`) |
 | 9 | Write multi-location spec | ✅ Complete | This document |
 
 ### Actual Implementation Details (Phase 3–6)

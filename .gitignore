@@ -43,3 +43,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .superpowers/
+
+# tina generated
+public/admin/
+tina/__generated__/client.ts
+tina/__generated__/.cache/

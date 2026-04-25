@@ -1,0 +1,17 @@
+{
+  "siteName": "Ben's Blinds Chicago",
+  "phone": "312.361.0908",
+  "email": "info@bensblinds.com",
+  "address": "Chicago, IL",
+  "city": "Chicago",
+  "state": "IL",
+  "zip": "60601",
+  "nav": [
+    { "label": "Products", "href": "/products" },
+    { "label": "Neighborhoods", "href": "/neighborhoods" },
+    { "label": "Blog", "href": "/blog" },
+    { "label": "Partners", "href": "/partners" },
+    { "label": "Seasonal Guide", "href": "/seasonal" },
+    { "label": "FAQ", "href": "/faq" }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "heroSpring": {
+    "headline": "Let Spring In: Without the Glare",
+    "sub": "Light-filtering shades that celebrate Chicago's renewal.",
+    "cta": "Explore Spring Styles"
+  },
+  "heroSummer": {
+    "headline": "Stay Cool All Summer",
+    "sub": "Solar shades block 85% of UV while keeping your skyline view.",
+    "cta": "Beat the Heat"
+  },
+  "heroFall": {
+    "headline": "Warm Up Your Windows for Fall",
+    "sub": "Wood blinds and layered drapery for Chicago's crisp autumn.",
+    "cta": "Shop Fall Favorites"
+  },
+  "heroWinter": {
+    "headline": "Insulate Against the Chicago Cold",
+    "sub": "Cellular shades cut heat loss by up to 40%. Stay warm.",
+    "cta": "Insulating Shades"
+  },
+  "heroSevere": {
+    "headline": "Polar Vortex Protection Starts Here",
+    "sub": "Our blackout cellular shades are the warmest you can buy.",
+    "cta": "Emergency Warmth"
+  },
+  "heroHeatwave": {
+    "headline": "Block the Scorching Heat",
+    "sub": "Heat-blocking solar shades: free in-home install consultation.",
+    "cta": "Cool My Home"
+  },
+  "reviews": [
+    {
+      "name": "Sarah M.",
+      "hood": "Lincoln Park",
+      "stars": 5,
+      "text": "Ben's Blinds transformed our bay windows. The cellular shades are gorgeous and our heating bill dropped noticeably."
+    },
+    {
+      "name": "James K.",
+      "hood": "Wicker Park",
+      "stars": 5,
+      "text": "Called on a Tuesday, had measurements Thursday, blinds installed the following week. Absolute pros."
+    },
+    {
+      "name": "Rita L.",
+      "hood": "Gold Coast",
+      "stars": 5,
+      "text": "Best decision I made for my condo. The motorized shades work flawlessly with HomeKit. 10/10 recommend."
+    }
+  ],
+  "ctaHeadline": "Ready for New Windows That Work for Chicago?",
+  "ctaBody": "Book a free in-home consultation. We measure, design, and install: you just enjoy the view."
+}

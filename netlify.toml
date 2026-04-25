@@ -8,13 +8,18 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+
+[context.production]
+  branch = "main"
 
 [context.production.environment]
   NEXT_PUBLIC_ENV = "production"
+
+[context.branch-deploy]
+  branch = "content"
+
+[context.branch-deploy.environment]
+  NEXT_PUBLIC_ENV = "preview"
 
 [context.deploy-preview.environment]
   NEXT_PUBLIC_ENV = "preview"

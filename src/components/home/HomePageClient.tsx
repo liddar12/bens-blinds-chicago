@@ -36,17 +36,34 @@ export function HomePageClient({ query, variables, data: initialData }: Props) {
   const reviewsOverride = hp?.reviews?.length ? hp.reviews : undefined
   const ctaOverride = hp?.ctaHeadline ? { headline: hp.ctaHeadline, body: hp.ctaBody } : undefined
 
+  // New CMS fields
+  const trustBarOverride = hp?.trustBar?.length ? hp.trustBar : undefined
+  const processStepsOverride = hp?.processSteps?.length ? hp.processSteps : undefined
+  const featuredProductsOverride = hp?.featuredProducts?.length ? hp.featuredProducts : undefined
+  const statsLineOverride: string | undefined = hp?.statsLine ?? undefined
+  const heroImageOverride: string | undefined = heroObj?.heroImage ?? undefined
+
   const tinaFields = {
     heroHeadline: heroObj ? tinaField(heroObj, 'headline') : undefined,
     heroSub: heroObj ? tinaField(heroObj, 'sub') : undefined,
     heroCta: heroObj ? tinaField(heroObj, 'cta') : undefined,
     ctaHeadline: hp?.ctaHeadline !== undefined ? tinaField(hp, 'ctaHeadline') : undefined,
     ctaBody: hp?.ctaBody !== undefined ? tinaField(hp, 'ctaBody') : undefined,
+    statsLine: hp?.statsLine !== undefined ? tinaField(hp, 'statsLine') : undefined,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     reviewFields: hp?.reviews?.map((r: any) => ({
       name: tinaField(r, 'name'),
       hood: tinaField(r, 'hood'),
       text: tinaField(r, 'text'),
+    })),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    trustBarFields: hp?.trustBar?.map((item: any) => ({
+      label: tinaField(item, 'label'),
+    })),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    processStepFields: hp?.processSteps?.map((step: any) => ({
+      title: tinaField(step, 'title'),
+      body: tinaField(step, 'body'),
     })),
   }
 
@@ -55,6 +72,11 @@ export function HomePageClient({ query, variables, data: initialData }: Props) {
       heroOverride={heroOverride}
       reviewsOverride={reviewsOverride}
       ctaOverride={ctaOverride}
+      trustBarOverride={trustBarOverride}
+      processStepsOverride={processStepsOverride}
+      featuredProductsOverride={featuredProductsOverride}
+      statsLineOverride={statsLineOverride}
+      heroImageOverride={heroImageOverride}
       tinaFields={tinaFields}
     />
   )

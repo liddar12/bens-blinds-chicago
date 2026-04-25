@@ -36,25 +36,50 @@ interface TinaFieldMap {
   heroCta?: string
   ctaHeadline?: string
   ctaBody?: string
+  statsLine?: string
   reviewFields?: Array<{ name?: string; hood?: string; text?: string }>
+  trustBarFields?: Array<{ label?: string }>
+  processStepFields?: Array<{ title?: string; body?: string }>
 }
 
 interface HomeClientProps {
   heroOverride?: { headline: string; sub: string; cta: string }
   reviewsOverride?: Array<{ name: string; hood: string; stars: number; text: string }>
   ctaOverride?: { headline: string; body: string }
+  trustBarOverride?: Array<{ icon: string; label: string }>
+  processStepsOverride?: Array<{ icon: string; title: string; body: string }>
+  featuredProductsOverride?: Array<{ slug: string; badge: string }>
+  statsLineOverride?: string
+  heroImageOverride?: string
   tinaFields?: TinaFieldMap
 }
 
-export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFields }: HomeClientProps = {}) {
+const defaultTrustBar = [
+  { icon: 'star',    label: '4.9 Stars · 318 Reviews' },
+  { icon: 'shield',  label: 'Licensed & Insured' },
+  { icon: 'home',    label: 'Free In-Home Consultation' },
+  { icon: 'clock',   label: '20+ Years Chicago Experience' },
+  { icon: 'wrench',  label: 'Professional Installation' },
+]
+
+export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, trustBarOverride, processStepsOverride, featuredProductsOverride, statsLineOverride, heroImageOverride, tinaFields }: HomeClientProps = {}) {
   const { season, tempF } = useSeasonContext()
   const copy = heroOverride ?? HERO_COPY[season]
   const seasonInfo = SEASONS[season]
   const reviews = reviewsOverride ?? REVIEWS
+  const trustBar = trustBarOverride ?? defaultTrustBar
+  const processSteps = processStepsOverride ?? PROCESS_STEPS
 
-  const recommendedProducts = PRODUCTS.filter((p) => p.recommend.includes(season))
-  const otherProducts = PRODUCTS.filter((p) => !p.recommend.includes(season))
-  const sortedProducts = [...recommendedProducts, ...otherProducts]
+  let sortedProducts: typeof PRODUCTS
+  if (featuredProductsOverride && featuredProductsOverride.length > 0) {
+    sortedProducts = featuredProductsOverride
+      .map((fp) => PRODUCTS.find((p) => p.key === fp.slug))
+      .filter((p): p is (typeof PRODUCTS)[number] => p !== undefined)
+  } else {
+    const recommendedProducts = PRODUCTS.filter((p) => p.recommend.includes(season))
+    const otherProducts = PRODUCTS.filter((p) => !p.recommend.includes(season))
+    sortedProducts = [...recommendedProducts, ...otherProducts]
+  }
 
   return (
     <>
@@ -124,8 +149,8 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
               (312) 361-0908
             </a>
           </div>
-          <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', color: 'var(--text-3)', fontFamily: 'var(--font-body)' }}>
-            ★★★★★ 4.9 · 312 Chicago reviews · Free in-home consultation
+          <p data-tina-field={tinaFields?.statsLine} style={{ marginTop: '1.5rem', fontSize: '0.875rem', color: 'var(--text-3)', fontFamily: 'var(--font-body)' }}>
+            {statsLineOverride ?? '★★★★★ 4.9 · 318 Chicago reviews · Free in-home consultation'}
           </p>
         </div>
 
@@ -142,7 +167,7 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
           }}
         >
           <img
-            src={IMG.heroLiving}
+            src={heroImageOverride || IMG.heroLiving}
             alt="Chicago living room with custom window treatments"
             style={{ width: '100%', display: 'block' }}
             loading="eager"
@@ -164,13 +189,7 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
             gap: '2rem',
           }}
         >
-          {[
-            { icon: 'star',    label: '4.9 Stars · 312 Reviews' },
-            { icon: 'shield',  label: 'Licensed & Insured' },
-            { icon: 'home',    label: 'Free In-Home Consultation' },
-            { icon: 'clock',   label: '20+ Years Chicago Experience' },
-            { icon: 'wrench',  label: 'Professional Installation' },
-          ].map((item) => (
+          {trustBar.map((item, i) => (
             <div
               key={item.label}
               style={{
@@ -184,7 +203,7 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
               }}
             >
               <Icon name={item.icon} size={16} style={{ color: 'var(--brand)' }} />
-              {item.label}
+              <span data-tina-field={tinaFields?.trustBarFields?.[i]?.label}>{item.label}</span>
             </div>
           ))}
         </div>
@@ -219,8 +238,12 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
               gap: '1.5rem',
             }}
           >
-            {sortedProducts.map((product) => {
+            {sortedProducts.map((product, pi) => {
               const isRecommended = product.recommend.includes(season)
+              const cmsBadge = featuredProductsOverride?.[pi]?.badge
+              const badgeText = cmsBadge !== undefined
+                ? (cmsBadge || null)
+                : (isRecommended ? `${seasonInfo.label} Pick` : null)
               return (
                 <Link
                   key={product.key}
@@ -233,13 +256,13 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
                       height: '100%',
                       cursor: 'pointer',
                       padding: 0,
-                      border: isRecommended ? '2px solid var(--brand)' : undefined,
+                      border: (isRecommended || badgeText) ? '2px solid var(--brand)' : undefined,
                       position: 'relative',
                       display: 'flex',
                       flexDirection: 'column',
                     }}
                   >
-                    {isRecommended && (
+                    {badgeText && (
                       <div
                         style={{
                           position: 'absolute',
@@ -257,7 +280,7 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
                           zIndex: 1,
                         }}
                       >
-                        {seasonInfo.label} Pick
+                        {badgeText}
                       </div>
                     )}
                     <div style={{ lineHeight: 0, height: '160px', overflow: 'hidden', background: 'var(--surface-2)', flexShrink: 0 }}>
@@ -360,7 +383,7 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem' }}>
-            {PROCESS_STEPS.map((step, i) => (
+            {processSteps.map((step, i) => (
               <div key={step.title} style={{ textAlign: 'center' }}>
                 <div
                   style={{
@@ -401,10 +424,10 @@ export function HomeClient({ heroOverride, reviewsOverride, ctaOverride, tinaFie
                     {i + 1}
                   </span>
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.0625rem', color: 'var(--text)', marginBottom: '0.5rem' }}>
+                <h3 data-tina-field={tinaFields?.processStepFields?.[i]?.title} style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.0625rem', color: 'var(--text)', marginBottom: '0.5rem' }}>
                   {step.title}
                 </h3>
-                <p style={{ color: 'var(--text-2)', fontSize: '0.9rem', lineHeight: 1.6, fontFamily: 'var(--font-body)' }}>
+                <p data-tina-field={tinaFields?.processStepFields?.[i]?.body} style={{ color: 'var(--text-2)', fontSize: '0.9rem', lineHeight: 1.6, fontFamily: 'var(--font-body)' }}>
                   {step.body}
                 </p>
               </div>

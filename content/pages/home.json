@@ -2,33 +2,63 @@
   "heroSpring": {
     "headline": "Let Spring In: Without the Glare",
     "sub": "Light-filtering shades that celebrate Chicago's renewal.",
-    "cta": "Explore Spring Styles"
+    "cta": "Explore Spring Styles",
+    "heroImage": ""
   },
   "heroSummer": {
     "headline": "Stay Cool All Summer",
     "sub": "Solar shades block 85% of UV while keeping your skyline view.",
-    "cta": "Beat the Heat"
+    "cta": "Beat the Heat",
+    "heroImage": ""
   },
   "heroFall": {
     "headline": "Warm Up Your Windows for Fall",
     "sub": "Wood blinds and layered drapery for Chicago's crisp autumn.",
-    "cta": "Shop Fall Favorites"
+    "cta": "Shop Fall Favorites",
+    "heroImage": ""
   },
   "heroWinter": {
     "headline": "Insulate Against the Chicago Cold",
     "sub": "Cellular shades cut heat loss by up to 40%. Stay warm.",
-    "cta": "Insulating Shades"
+    "cta": "Insulating Shades",
+    "heroImage": ""
   },
   "heroSevere": {
     "headline": "Polar Vortex Protection Starts Here",
     "sub": "Our blackout cellular shades are the warmest you can buy.",
-    "cta": "Emergency Warmth"
+    "cta": "Emergency Warmth",
+    "heroImage": ""
   },
   "heroHeatwave": {
     "headline": "Block the Scorching Heat",
     "sub": "Heat-blocking solar shades: free in-home install consultation.",
-    "cta": "Cool My Home"
+    "cta": "Cool My Home",
+    "heroImage": ""
   },
+  "statsLine": "★★★★★ 4.9 · 318 Chicago reviews · Free in-home consultation",
+  "trustBar": [
+    { "icon": "star",    "label": "4.9 Stars · 318 Reviews" },
+    { "icon": "shield",  "label": "Licensed & Insured" },
+    { "icon": "home",    "label": "Free In-Home Consultation" },
+    { "icon": "clock",   "label": "20+ Years Experience" },
+    { "icon": "wrench",  "label": "Professional Installation" }
+  ],
+  "processSteps": [
+    { "icon": "calendar",  "title": "Book a Free Consult",   "body": "Pick a time online or call. We come to you — no showroom hassle." },
+    { "icon": "ruler",     "title": "Measure & Design",      "body": "Our expert measures every window and helps you pick the perfect product." },
+    { "icon": "clipboard", "title": "Custom Fabrication",    "body": "Your treatments are made to spec and delivered in 2–3 weeks." },
+    { "icon": "check",     "title": "Professional Install",  "body": "We hang everything, clean up, and make sure you love the result." }
+  ],
+  "featuredProducts": [
+    { "slug": "cellular",  "badge": "Top Pick · Winter" },
+    { "slug": "solar",     "badge": "Best for Condos" },
+    { "slug": "roller",    "badge": "" },
+    { "slug": "wood",      "badge": "" },
+    { "slug": "shutters",  "badge": "Most Durable" },
+    { "slug": "roman",     "badge": "" },
+    { "slug": "motorized", "badge": "Smart Home Ready" },
+    { "slug": "drapery",   "badge": "" }
+  ],
   "reviews": [
     {
       "name": "Sarah M.",

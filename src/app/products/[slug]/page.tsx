@@ -1,10 +1,22 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { cache } from 'react'
 import { PRODUCTS, SEASONS } from '@/lib/season'
 import { getPartnersForProduct, TIER_LABELS } from '@/lib/partners'
 import { IMG } from '@/lib/images'
 import { Icon } from '@/components/ui/Icon'
+import { tinaClient } from '@/lib/tina-client'
+
+const fetchTinaProduct = cache(async (slug: string) => {
+  'use cache'
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return await (tinaClient.queries as any).product({ relativePath: `${slug}.mdx` })
+  } catch {
+    return null
+  }
+})
 
 export async function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.key }))
@@ -208,12 +220,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = PRODUCTS.find((p) => p.key === slug)
   if (!product) notFound()
 
+  // Try fetching CMS data; fall back to hardcoded
+  const tinaData = await fetchTinaProduct(slug)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tinaProduct = tinaData?.data?.product as any | null
+
   const details = PRODUCT_DETAILS[slug]
   const currentSeason = 'spring' as const
   const isRecommended = product.recommend.includes(currentSeason)
   const seasonInfo = SEASONS[currentSeason]
-  const faqs = FAQ_SCHEMA_ITEMS[slug] ?? []
+  // Use Tina FAQs if available, fall back to hardcoded
+  const faqs: Array<{ q: string; a: string }> = tinaProduct?.faqs?.length
+    ? tinaProduct.faqs
+    : (FAQ_SCHEMA_ITEMS[slug] ?? [])
   const productPartners = getPartnersForProduct(slug)
+
+  // Merge: Tina overrides headline/intro if present
+  const displayHeadline = tinaProduct?.title ?? details?.headline ?? product.name
+  const displayIntro = tinaProduct?.description ?? details?.intro ?? product.blurb
 
   const faqSchema = faqs.length > 0 ? {
     '@context': 'https://schema.org',
@@ -228,8 +252,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: details?.headline ?? product.name,
-    description: details?.intro ?? product.blurb,
+    name: displayHeadline,
+    description: displayIntro,
     url: `https://bensblinds.com/products/${slug}`,
     image: `https://bensblinds.com/images/products/${slug}-hero.jpg`,
     brand: { '@type': 'Brand', name: "Ben's Blinds Chicago" },
@@ -320,10 +344,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               marginBottom: '1rem',
             }}
           >
-            {details?.headline ?? product.name}
+            {displayHeadline}
           </h1>
           <p style={{ fontSize: '1.125rem', color: 'var(--text-2)', lineHeight: 1.7, maxWidth: '680px', fontFamily: 'var(--font-body)', marginBottom: '2rem' }}>
-            {details?.intro ?? product.blurb}
+            {displayIntro}
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <Link href="/quote" className="btn btn-primary">
